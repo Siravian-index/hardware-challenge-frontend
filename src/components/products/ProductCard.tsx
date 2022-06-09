@@ -9,12 +9,9 @@ interface IProps {
     product: IProduct
 }
 
-const ProductCard : React.FC<IProps> = ({product}) => {
+const ProductCard: React.FC<IProps> = ({product}) => {
     const theme = useMantineTheme();
-
-    const secondaryColor = theme.colorScheme === 'dark'
-        ? theme.colors.dark[1]
-        : theme.colors.gray[7];
+    console.log(theme)
 
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
@@ -31,26 +28,26 @@ const ProductCard : React.FC<IProps> = ({product}) => {
     return <>
         <div>
             <Card shadow="sm" p="lg">
-                <Group position="apart" style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
+                <Group position="apart" style={{marginBottom: 5, marginTop: theme.spacing.sm}}>
                     <Text weight={500}>{product.name} - ${product.price}</Text>
                     <Button onClick={() => handleDelete(product)} color='red' compact>Delete</Button>
                 </Group>
 
-                <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5 }}>
+                <Text size="sm" style={{lineHeight: 1.5}}>
                     {product.description}
                 </Text>
-                <Group position="apart" style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
+                <Group position="apart" style={{marginBottom: 5, marginTop: theme.spacing.sm}}>
                     <Text weight={500}>Min</Text>
                     <Text weight={700}>Stock</Text>
                     <Text weight={500}>Max</Text>
                 </Group>
-                <Group position="apart" style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
+                <Group position="apart" style={{marginBottom: 5, marginTop: theme.spacing.sm}}>
                     <Text weight={500}>{product.min}</Text>
                     <Text weight={500}>{product.stock}</Text>
                     <Text weight={500}>{product.max}</Text>
                 </Group>
 
-                <Button onClick={handleClick} variant="light" color="blue" fullWidth style={{ marginTop: 14 }}>
+                <Button onClick={handleClick} variant="light" color="blue" fullWidth style={{marginTop: 14}}>
                     Manage
                 </Button>
             </Card>

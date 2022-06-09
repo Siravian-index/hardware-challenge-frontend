@@ -1,5 +1,16 @@
 import React, {useState} from 'react';
-import {AppShell, Burger, Footer, Header, MediaQuery, Navbar, Text, useMantineTheme,} from '@mantine/core';
+import {
+    Anchor,
+    AppShell,
+    Burger,
+    Footer,
+    Header,
+    MediaQuery,
+    Navbar,
+    Text,
+    Title,
+    useMantineTheme,
+} from '@mantine/core';
 import {Link, Outlet} from "react-router-dom";
 
 export default function AppShellMantine() {
@@ -28,22 +39,22 @@ export default function AppShellMantine() {
             navbar={
                 <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{sm: 200, lg: 300}}>
                     <Navbar.Section>
-                        <Link to='/dashboard'>Products</Link>
+                        <Anchor component={Link} to='/dashboard'>Products</Anchor>
                     </Navbar.Section>
                     <Navbar.Section>
-                        <Link to='/dashboard/providers'>Providers</Link>
+                        <Anchor component={Link} to='/dashboard/providers'>Providers</Anchor>
                     </Navbar.Section>
                     <Navbar.Section>
-                        <Link to='/dashboard/provider'>Add Provider</Link>
+                        <Anchor component={Link} to='/dashboard/provider'>Add Provider</Anchor>
                     </Navbar.Section>
                     <Navbar.Section>
-                        <Link to='/dashboard/receipts'>See Receipts</Link>
+                        <Anchor component={Link} to='/dashboard/receipts' >See Receipts</Anchor>
                     </Navbar.Section>
                     <Navbar.Section>
-                        <Link to='/dashboard/receipt'>New Receipt</Link>
+                        <Anchor component={Link} to='/dashboard/receipt'>New Receipt</Anchor>
                     </Navbar.Section>
                     <Navbar.Section>
-                        <Link to='/dashboard/bills'>See Bills</Link>
+                        <Anchor component={Link} to='/dashboard/bills'>See Bills</Anchor>
                     </Navbar.Section>
                 </Navbar>
             }
@@ -65,7 +76,7 @@ export default function AppShellMantine() {
                             />
                         </MediaQuery>
 
-                        <Text>Don Raul's Hardware Store</Text>
+                        <Title order={3}>Don Raul's Hardware Store</Title>
                     </div>
                 </Header>
             }
