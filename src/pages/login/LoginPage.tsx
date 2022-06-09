@@ -1,9 +1,14 @@
 import * as React from "react"
+import Login from "../../components/login/Login";
 
 interface IProps {}
 
 const LoginPage : React.FC<IProps> = () => {
-    return <div>login page</div>
+    const [show, setShow] = React.useState(false);
+
+    return <div>
+        <Login/>
+    </div>
 }
 
 export default LoginPage

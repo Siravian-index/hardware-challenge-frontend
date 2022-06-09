@@ -44,7 +44,6 @@ export default function AppShellMantine() {
             }
         >
             {/*this should render an outlet*/}
-            <Text>Resize app to see responsive navbar in action</Text>
             <Outlet/>
         </AppShell>
     );

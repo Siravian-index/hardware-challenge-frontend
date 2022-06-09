@@ -1,7 +1,6 @@
 import AppShellMantine from "./pages/dashboard/AppShellMantine";
 import {Route, Routes,} from "react-router-dom";
 import LoginPage from "./pages/login/LoginPage";
-import TestComponent from "./components/TestComponent";
 
 function App() {
 
@@ -11,10 +10,15 @@ function App() {
             <Routes>
                 <Route path="/" element={<LoginPage/>}/>
                 <Route path="/dashboard"  element={<AppShellMantine/>}>
-                    <Route
-                        path="test"
-                        element={<TestComponent/>}
-                    />
+                    {/*<Route*/}
+                    {/*    index*/}
+                    {/*    element={<DefaultIndexComp/>}*/}
+                    {/*/>*/}
+                    {/*<Route*/}
+                    {/*    path="products"*/}
+                    {/*    element={<TestComponent/>}*/}
+                    {/*/>*/}
+                {/*    rest of the routes*/}
                 </Route>
             </Routes>
         </div>
@@ -23,14 +27,3 @@ function App() {
 
 export default App
 
-/* like this
-*     <Routes>
-      <Route path="/" element={<Dashboard />}>
-        <Route
-          path="messages"
-          element={<DashboardMessages />}
-        />
-        <Route path="tasks" element={<DashboardTasks />} />
-      </Route>
-    </Routes>
-* */
