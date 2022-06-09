@@ -7,7 +7,7 @@ export interface IProviderInitialState {
 }
 
 export interface IProvider {
-    id: string
+    id?: string
     name: string
     card: string
 }
