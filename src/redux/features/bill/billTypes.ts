@@ -13,9 +13,10 @@ interface IProductsSold {
     amount: number
 }
 
-interface IBill {
+export interface IBill {
     id?: string
     customer: string
+    date?: Date
     seller: string
     total: number
     productsSold: IProductsSold[]
