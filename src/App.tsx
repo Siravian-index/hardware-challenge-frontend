@@ -4,6 +4,7 @@ import LoginPage from "./pages/login/LoginPage";
 import ProvidersPage from "./pages/dashboard/providers/ProvidersPage";
 import AddProviderPage from "./pages/dashboard/providers/AddProviderPage";
 import ReceiptsPage from "./pages/dashboard/receipts/ReceiptsPage";
+import ProductsPage from "./pages/dashboard/products/ProductsPage";
 
 function App() {
 
@@ -13,10 +14,10 @@ function App() {
             <Routes>
                 <Route path="/" element={<LoginPage/>}/>
                 <Route path="/dashboard"  element={<AppShellMantine/>}>
-                    {/*<Route*/}
-                    {/*    index*/}
-                    {/*    element={<DefaultIndexComp/>}*/}
-                    {/*/>*/}
+                    <Route
+                        index
+                        element={<ProductsPage/>}
+                    />
                     <Route
                         path="providers"
                         element={<ProvidersPage/>}

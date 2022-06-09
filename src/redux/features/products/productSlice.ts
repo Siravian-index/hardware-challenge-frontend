@@ -3,7 +3,6 @@ import {IProduct, IProductInitialState} from "./productTypes";
 import {fetchStatus} from "../generalTypes";
 import {RootState} from "../../app/store";
 import {ENDPOINT, HEADERS, HttpMethod, placeErrorInState} from "../generalData";
-import {IProvider} from "../provider/providerTypes";
 
 //initial state
 const initialState: IProductInitialState = {
@@ -80,6 +79,7 @@ const productSlice = createSlice({
         builder.addCase(postProductThunk.fulfilled, (state, action) => {
             state.productsList.push(action.payload)
         })
+        //Delete
         builder.addCase(deleteProductThunk.pending, (state) => {
             state.status = fetchStatus.PENDING
 
@@ -97,6 +97,7 @@ const productSlice = createSlice({
                 state.status = fetchStatus.FULFILL
             }
         })
+        //PUT
         builder.addCase(updateProductThunk.pending, (state) => {
             state.status = fetchStatus.PENDING
 
