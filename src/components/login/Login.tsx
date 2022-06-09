@@ -1,5 +1,5 @@
 import * as React from "react"
-import {Container, PasswordInput, TextInput} from "@mantine/core";
+import {Button, Container, Paper, PasswordInput, Text, TextInput} from "@mantine/core";
 
 interface IProps {
 }
@@ -8,8 +8,9 @@ const Login: React.FC<IProps> = () => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     return <>
-        <form>
-            <Container>
+        <Paper shadow="xs" p="xl">
+            <form>
+                <Text align="center" size="lg" color="blue">Login</Text>
                 <TextInput
                     value={email}
                     onChange={(event) => setEmail(event.currentTarget.value)}
@@ -23,8 +24,13 @@ const Login: React.FC<IProps> = () => {
                     label="Password"
                     required
                 />
-            </Container>
-        </form>
+                <Button color="cyan" type="submit" mt="xs">
+                    Login
+                </Button>
+            {/*    Google login here*/}
+            </form>
+        </Paper>
+
     </>
 }
 
