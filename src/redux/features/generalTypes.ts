@@ -7,4 +7,3 @@ export enum fetchStatus {
 
 export type ErrorType = null | string
 
-export const ENDPOINT = ""

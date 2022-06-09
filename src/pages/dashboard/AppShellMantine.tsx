@@ -38,7 +38,7 @@ export default function AppShellMantine() {
                             />
                         </MediaQuery>
 
-                        <Text>Application header</Text>
+                        <Text>Don Raul's Hardware Store</Text>
                     </div>
                 </Header>
             }
