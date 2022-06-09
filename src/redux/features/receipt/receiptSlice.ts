@@ -14,12 +14,12 @@ const initialState: IReceiptInitialState = {
 
 //thunks
 export const getReceiptsThunk = createAsyncThunk("get/receipts", async () => {
-    const response = await fetch(`${ENDPOINT}bill`)
+    const response = await fetch(`${ENDPOINT}receipt`)
     return (await response.json()) as IReceipt[]
 })
 
 export const postReceiptThunk = createAsyncThunk("post/receipt", async (bill: IBill) => {
-    const response = await fetch(`${ENDPOINT}bill`, {
+    const response = await fetch(`${ENDPOINT}receipt`, {
         method: HttpMethod.POST,
         headers: HEADERS,
         body: JSON.stringify(bill)
