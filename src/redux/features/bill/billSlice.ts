@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {IBill, IBillInitialState} from "./billTypes";
 import {fetchStatus} from "../generalTypes";
 import {ENDPOINT, HEADERS, HttpMethod, placeErrorInState} from "../generalData";
+import {RootState} from "../../app/store";
 
 const initialState: IBillInitialState = {
     billList: [],
@@ -60,6 +61,10 @@ export const billSlice = createSlice({
     }
 })
 
+//selectors
+export const selectBillList = () => (state: RootState) => state.bill.billList
+export const selectBillError = () => (state: RootState) => state.bill.error
+export const selectBillStatus = () => (state: RootState) => state.bill.status
 
 
 const billReducer = billSlice.reducer

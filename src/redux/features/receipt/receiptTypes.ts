@@ -7,7 +7,7 @@ export interface IReceiptInitialState {
     status: fetchStatus
 }
 
-interface IReceipt {
+export interface IReceipt {
     id?: string
     provider: IProvider
     productId: string
