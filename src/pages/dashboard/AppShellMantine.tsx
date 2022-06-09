@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {AppShell, Burger, Footer, Header, MediaQuery, Navbar, Text, useMantineTheme,} from '@mantine/core';
+import {Outlet} from "react-router-dom";
 
 export default function AppShellMantine() {
     const theme = useMantineTheme();
@@ -44,6 +45,7 @@ export default function AppShellMantine() {
         >
             {/*this should render an outlet*/}
             <Text>Resize app to see responsive navbar in action</Text>
+            <Outlet/>
         </AppShell>
     );
 }

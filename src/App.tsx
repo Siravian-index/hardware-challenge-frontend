@@ -1,13 +1,22 @@
-import AppShellMantine from "./components/AppShellMantine";
+import AppShellMantine from "./pages/dashboard/AppShellMantine";
+import {Route, Routes,} from "react-router-dom";
+import LoginPage from "./pages/login/LoginPage";
+import TestComponent from "./components/TestComponent";
 
 function App() {
 
     //This will handle all the routes
     return (
-        <div className="App">
-
-            <AppShellMantine/>
-
+        <div>
+            <Routes>
+                <Route path="/" element={<LoginPage/>}/>
+                <Route path="/dashboard"  element={<AppShellMantine/>}>
+                    <Route
+                        path="test"
+                        element={<TestComponent/>}
+                    />
+                </Route>
+            </Routes>
         </div>
     )
 }
