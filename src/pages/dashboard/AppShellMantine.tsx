@@ -1,10 +1,20 @@
 import React, {useState} from 'react';
 import {AppShell, Burger, Footer, Header, MediaQuery, Navbar, Text, useMantineTheme,} from '@mantine/core';
-import {Outlet} from "react-router-dom";
+import {Link, Outlet} from "react-router-dom";
 
 export default function AppShellMantine() {
     const theme = useMantineTheme();
     const [opened, setOpened] = useState(false);
+    const navbarOptions = [{
+        path: "/dashboard/providers",
+        content: "Providers"
+    }, {
+        path: "/dashboard",
+        content: "Products"
+    }, {
+        path: "/dashboard/receipt",
+        content: "New Receipt"
+    }]
     return (
         <AppShell
             styles={{
@@ -17,7 +27,24 @@ export default function AppShellMantine() {
             fixed
             navbar={
                 <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{sm: 200, lg: 300}}>
-                    <Text>Application navbar</Text>
+                    <Navbar.Section>
+                        <Link to='/dashboard/providers'>Providers</Link>
+                    </Navbar.Section>
+                    <Navbar.Section>
+                        <Link to='/dashboard'>Products</Link>
+                    </Navbar.Section>
+                    <Navbar.Section>
+                        <Link to='/dashboard/receipt'>New Receipt</Link>
+                    </Navbar.Section>
+                    <Navbar.Section>
+                        <Link to='/dashboard/provider'>Add Provider</Link>
+                    </Navbar.Section>
+                    {/*<Navbar.Section>*/}
+                    {/*    <Link to='/dashboard/receipt'>New Receipt</Link>*/}
+                    {/*</Navbar.Section>*/}
+                    {/*<Navbar.Section>*/}
+                    {/*    <Link to='/dashboard/receipt'>New Receipt</Link>*/}
+                    {/*</Navbar.Section>*/}
                 </Navbar>
             }
             footer={

@@ -2,6 +2,7 @@ import AppShellMantine from "./pages/dashboard/AppShellMantine";
 import {Route, Routes,} from "react-router-dom";
 import LoginPage from "./pages/login/LoginPage";
 import ProvidersPage from "./pages/dashboard/providers/ProvidersPage";
+import AddProviderPage from "./pages/dashboard/providers/AddProviderPage";
 
 function App() {
 
@@ -18,6 +19,10 @@ function App() {
                     <Route
                         path="providers"
                         element={<ProvidersPage/>}
+                    />
+                    <Route
+                        path="provider"
+                        element={<AddProviderPage/>}
                     />
                 {/*    rest of the routes*/}
                 </Route>
