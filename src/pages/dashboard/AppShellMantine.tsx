@@ -28,23 +28,23 @@ export default function AppShellMantine() {
             navbar={
                 <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{sm: 200, lg: 300}}>
                     <Navbar.Section>
+                        <Link to='/dashboard'>Products</Link>
+                    </Navbar.Section>
+                    <Navbar.Section>
                         <Link to='/dashboard/providers'>Providers</Link>
                     </Navbar.Section>
                     <Navbar.Section>
-                        <Link to='/dashboard'>Products</Link>
+                        <Link to='/dashboard/provider'>Add Provider</Link>
+                    </Navbar.Section>
+                    <Navbar.Section>
+                        <Link to='/dashboard/receipts'>See Receipts</Link>
                     </Navbar.Section>
                     <Navbar.Section>
                         <Link to='/dashboard/receipt'>New Receipt</Link>
                     </Navbar.Section>
                     <Navbar.Section>
-                        <Link to='/dashboard/provider'>Add Provider</Link>
+                        <Link to='/dashboard/bills'>See Bills</Link>
                     </Navbar.Section>
-                    {/*<Navbar.Section>*/}
-                    {/*    <Link to='/dashboard/receipt'>New Receipt</Link>*/}
-                    {/*</Navbar.Section>*/}
-                    {/*<Navbar.Section>*/}
-                    {/*    <Link to='/dashboard/receipt'>New Receipt</Link>*/}
-                    {/*</Navbar.Section>*/}
                 </Navbar>
             }
             footer={
