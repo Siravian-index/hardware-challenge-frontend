@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Anchor,
     AppShell,
-    Burger,
+    Burger, Divider,
     Footer,
     Header,
     MediaQuery,
@@ -12,20 +12,23 @@ import {
     useMantineTheme,
 } from '@mantine/core';
 import {Link, Outlet} from "react-router-dom";
+import {getProductsThunk} from "../../redux/features/products/productSlice";
+import {useAppDispatch} from "../../redux/app/store";
+import {getBillsThunk} from "../../redux/features/bill/billSlice";
+import {getProvidersThunk} from "../../redux/features/provider/providerSlice";
+import {getReceiptsThunk} from "../../redux/features/receipt/receiptSlice";
 
 export default function AppShellMantine() {
     const theme = useMantineTheme();
     const [opened, setOpened] = useState(false);
-    const navbarOptions = [{
-        path: "/dashboard/providers",
-        content: "Providers"
-    }, {
-        path: "/dashboard",
-        content: "Products"
-    }, {
-        path: "/dashboard/receipt",
-        content: "New Receipt"
-    }]
+    //dispatch get
+    const dispatch = useAppDispatch()
+    useEffect(() => {
+        dispatch(getProductsThunk())
+        dispatch(getBillsThunk())
+        dispatch(getProvidersThunk())
+        dispatch(getReceiptsThunk())
+    }, [])
     return (
         <AppShell
             styles={{
@@ -45,17 +48,28 @@ export default function AppShellMantine() {
                         <Anchor component={Link} to='/dashboard/providers'>Providers</Anchor>
                     </Navbar.Section>
                     <Navbar.Section>
-                        <Anchor component={Link} to='/dashboard/provider'>Add Provider</Anchor>
+                        <Anchor component={Link} to='/dashboard/receipts'>Receipts</Anchor>
                     </Navbar.Section>
                     <Navbar.Section>
-                        <Anchor component={Link} to='/dashboard/receipts' >See Receipts</Anchor>
+                        <Anchor component={Link} to='/dashboard/bills'>Bills</Anchor>
                     </Navbar.Section>
+                    <Divider/>
+                    <Navbar.Section>
+                        <Anchor component={Link} to='/dashboard/product'>New Product</Anchor>
+                    </Navbar.Section>
+                    <Navbar.Section>
+                        <Anchor component={Link} to='/dashboard/provider'>Add Provider</Anchor>
+                    </Navbar.Section>
+
                     <Navbar.Section>
                         <Anchor component={Link} to='/dashboard/receipt'>New Receipt</Anchor>
                     </Navbar.Section>
+
                     <Navbar.Section>
-                        <Anchor component={Link} to='/dashboard/bills'>See Bills</Anchor>
+                        <Anchor component={Link} to='/dashboard/bill'>New Bills</Anchor>
                     </Navbar.Section>
+                    <Divider/>
+
                 </Navbar>
             }
             footer={

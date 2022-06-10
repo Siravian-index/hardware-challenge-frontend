@@ -6,6 +6,9 @@ import AddProviderPage from "./pages/dashboard/providers/AddProviderPage";
 import ReceiptsPage from "./pages/dashboard/receipts/ReceiptsPage";
 import ProductsPage from "./pages/dashboard/products/ProductsPage";
 import BillsPage from "./pages/dashboard/bills/BillsPage";
+import AddReceiptPage from "./pages/dashboard/receipts/AddReceiptPage";
+import CreateNewBillPage from "./pages/dashboard/bills/CreateNewBillPage";
+import AddProductPage from "./pages/dashboard/products/AddProductPage";
 
 function App() {
 
@@ -19,6 +22,7 @@ function App() {
                         index
                         element={<ProductsPage/>}
                     />
+                    <Route path='product' element={<AddProductPage/>} />
                     <Route
                         path="providers"
                         element={<ProvidersPage/>}
@@ -28,7 +32,9 @@ function App() {
                         element={<AddProviderPage/>}
                     />
                     <Route path='receipts' element={<ReceiptsPage/>}/>
+                    <Route path='receipt' element={<AddReceiptPage/>}/>
                     <Route path='bills' element={<BillsPage/>}/>
+                    <Route path='/dashboard/bill' element={<CreateNewBillPage/>}/>
                 {/*    rest of the routes*/}
                 </Route>
             </Routes>

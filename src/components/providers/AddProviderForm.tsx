@@ -1,7 +1,8 @@
 import * as React from "react"
-import {Button, Container, Paper, TextInput} from "@mantine/core";
+import {Alert, Button, Container, Paper, TextInput} from "@mantine/core";
 import {useAppDispatch} from "../../redux/app/store";
 import {postProviderThunk} from "../../redux/features/provider/providerSlice";
+import {useEffect} from "react";
 
 
 interface IProps {
@@ -10,6 +11,7 @@ interface IProps {
 const AddProviderForm: React.FC<IProps> = () => {
     const [name, setName] = React.useState('');
     const [card, setCard] = React.useState('');
+    const [showAlert, setShowAlert] = React.useState(false)
     const dispatch = useAppDispatch()
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -17,12 +19,17 @@ const AddProviderForm: React.FC<IProps> = () => {
             dispatch(postProviderThunk({name, card}))
             setName("")
             setCard("")
+            setShowAlert(true)
         }
     }
+    useEffect(() => {
+        setTimeout(() => {
+            setShowAlert(false)
+        }, 5000)
+    }, [showAlert])
 
     return <>
         <Container size="xs" px="xs" my="xl">
-
             <Paper shadow="xs" p="xl">
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <TextInput
@@ -43,6 +50,13 @@ const AddProviderForm: React.FC<IProps> = () => {
                     </Button>
                 </form>
             </Paper>
+            {
+                showAlert &&
+                <Alert title="Added!" color="teal">
+                    Provider added successfully
+                </Alert>
+            }
+
         </Container>
     </>
 }
