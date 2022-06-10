@@ -1,6 +1,6 @@
 import * as React from "react"
 import {useEffect} from "react"
-import {Button, Container, NumberInput, Paper, Select} from "@mantine/core";
+import {Alert, Button, Container, NumberInput, Paper, Select} from "@mantine/core";
 import {useSelector} from "react-redux";
 import {selectProviderList} from "../../redux/features/provider/providerSlice";
 import {selectProductList, updateProductThunk} from "../../redux/features/products/productSlice";
@@ -59,6 +59,7 @@ const AddReceiptForm: React.FC<IProps> = () => {
     useEffect(() => {
         const optionalProduct = productList.find(p => p.id === productId)
         setProductToEdit(optionalProduct)
+        setAmount(0)
     }, [productId])
 
     useEffect(() => {
@@ -93,15 +94,25 @@ const AddReceiptForm: React.FC<IProps> = () => {
                     />
                     {
                         productToEdit?.name &&
-                        <NumberInput
-                            min={0}
-                            max={productToEdit.max - productToEdit.stock}
-                            value={amount}
-                            onChange={(e) => handleNumericChange(e, setAmount)}
-                            placeholder="Amount"
-                            label="Product's amount"
-                            required
-                        />
+                        <>
+                            <NumberInput
+                                min={0}
+                                max={productToEdit.max - productToEdit.stock}
+                                value={amount}
+                                onChange={(e) => handleNumericChange(e, setAmount)}
+                                placeholder="Amount"
+                                label={`Product's amount: ${productToEdit.stock + amount}/ ${productToEdit.max}`}
+                                required
+                            />
+                            {
+                                (productToEdit.stock + amount) >= productToEdit.max &&
+                                <Alert title="Stock overflow" color="red">
+                                    Product's stock has reached its max: {productToEdit.max}!
+                                </Alert>
+                            }
+
+                        </>
+
                     }
 
                     {
