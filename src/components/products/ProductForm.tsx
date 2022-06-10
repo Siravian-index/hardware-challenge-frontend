@@ -1,20 +1,57 @@
 import * as React from "react"
-import {Alert, Button, Container, NumberInput, Paper, Select, TextInput} from "@mantine/core";
+import {Button, Container, NumberInput, Paper, Select, TextInput} from "@mantine/core";
 import {IProvider} from "../../redux/features/provider/providerTypes";
+import {useSelector} from "react-redux";
+import {selectProviderList} from "../../redux/features/provider/providerSlice";
+import {IProduct} from "../../redux/features/products/productTypes";
+import {useAppDispatch} from "../../redux/app/store";
+import {postProductThunk} from "../../redux/features/products/productSlice";
 
 interface IProps {
 }
 
 const ProductForm: React.FC<IProps> = () => {
+    const DEFAULT_STOCK = 0
+    const providerList = useSelector(selectProviderList())
+    const dispatch = useAppDispatch()
     const [name, setName] = React.useState("")
     const [description, setDescription] = React.useState("")
     const [price, setPrice] = React.useState(0)
     const [max, setMax] = React.useState(0)
     const [min, setMin] = React.useState(0)
-    const [provider, setProvider] = React.useState({} as IProvider)
+    const [providerId, setProviderId] = React.useState<string | null>("")
+
+    const providerSelectData = providerList.map((provider) => ( {value: `${provider.id}`, label: provider.name}))
 
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        const optionalProvider = providerList.find((provider) => provider.id === providerId)
+        const isValid = [name, description, price, max, min, optionalProvider?.name].every(value => Boolean(value))
+        if (isValid) {
+            const provider = optionalProvider as IProvider
+            const newProduct: IProduct = {
+                name,
+                description,
+                price,
+                max,
+                min,
+                stock: DEFAULT_STOCK,
+                provider
+            }
+            dispatch(postProductThunk(newProduct))
+            setName("")
+            setDescription("")
+            setPrice(0)
+            setMax(0)
+            setMin(0)
+            setProviderId("")
+        }
+    }
+
+    const handleNumericChange = (e: number | undefined, setValueCallback: React.Dispatch<React.SetStateAction<number>>) => {
+        if (typeof e === "number") {
+            setValueCallback(e)
+        }
     }
 
     return <>
@@ -35,19 +72,26 @@ const ProductForm: React.FC<IProps> = () => {
                         required
                     />
                     <NumberInput
-                        defaultValue={0}
+                        min={0}
+                        value={min}
+                        onChange={(e) => handleNumericChange(e, setMin)}
                         placeholder="Min"
                         label="Min amount"
                         required
                     />
                     <NumberInput
-                        defaultValue={0}
+                        min={0}
+                        value={max}
+                        onChange={(e) => handleNumericChange(e, setMax)}
+
                         placeholder="Max"
                         label="Max amount"
                         required
                     />
                     <NumberInput
-                        defaultValue={0}
+                        min={0}
+                        value={price}
+                        onChange={(e) => handleNumericChange(e, setPrice)}
                         placeholder="Price"
                         label="Product's price"
                         required
@@ -55,12 +99,9 @@ const ProductForm: React.FC<IProps> = () => {
                     <Select
                         label="Select provider"
                         placeholder="Pick one"
-                        data={[
-                            { value: 'react', label: 'React' },
-                            { value: 'ng', label: 'Angular' },
-                            { value: 'svelte', label: 'Svelte' },
-                            { value: 'vue', label: 'Vue' },
-                        ]}
+                        value={providerId}
+                        onChange={setProviderId}
+                        data={providerSelectData}
                     />
                     <Button color="cyan" type="submit" mt="xs">
                         Add
