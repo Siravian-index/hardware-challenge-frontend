@@ -121,6 +121,7 @@ const productSlice = createSlice({
 
 //export selectors
 export const selectProductList = () => (state: RootState) => state.products.productsList
+export const selectProductById = (id:string) => (state: RootState) => state.products.productsList.find(p => p.id === id)
 export const selectProductError = () => (state: RootState) => state.products.error
 export const selectProductStatus = () => (state: RootState) => state.products.status
 

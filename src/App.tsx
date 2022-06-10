@@ -5,6 +5,7 @@ import ProvidersPage from "./pages/dashboard/providers/ProvidersPage";
 import AddProviderPage from "./pages/dashboard/providers/AddProviderPage";
 import ReceiptsPage from "./pages/dashboard/receipts/ReceiptsPage";
 import ProductsPage from "./pages/dashboard/products/ProductsPage";
+import BillsPage from "./pages/dashboard/bills/BillsPage";
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
                         element={<AddProviderPage/>}
                     />
                     <Route path='receipts' element={<ReceiptsPage/>}/>
+                    <Route path='bills' element={<BillsPage/>}/>
                 {/*    rest of the routes*/}
                 </Route>
             </Routes>

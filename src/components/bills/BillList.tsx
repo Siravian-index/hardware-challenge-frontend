@@ -4,23 +4,23 @@ import {useSelector} from "react-redux";
 import {useAppDispatch} from "../../redux/app/store";
 import {fetchStatus} from "../../redux/features/generalTypes";
 import {SimpleGrid} from "@mantine/core";
-import {getReceiptsThunk, selectReceiptList, selectReceiptStatus} from "../../redux/features/receipt/receiptSlice";
-import ReceiptCard from "./ReceiptCard";
+import {getBillsThunk, selectBillList, selectBillStatus} from "../../redux/features/bill/billSlice";
+import BillCard from "./BillCard";
 
 interface IProps {}
 
-const ReceiptList : React.FC<IProps> = () => {
-    const receipts = useSelector(selectReceiptList())
-    const status = useSelector(selectReceiptStatus())
+const BillList : React.FC<IProps> = () => {
+    const bills = useSelector(selectBillList())
+    const status = useSelector(selectBillStatus())
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         if (status === fetchStatus.IDLE) {
-            dispatch(getReceiptsThunk())
+            dispatch(getBillsThunk())
         }
     }, [])
 
-    const content = receipts.map(receipt => <ReceiptCard key={receipt.id} receipt={receipt} />)
+    const content = bills.map(bill => <BillCard key={bill.id} bill={bill} />)
 
     return <SimpleGrid
         cols={4}
@@ -34,6 +34,6 @@ const ReceiptList : React.FC<IProps> = () => {
     </SimpleGrid>
 }
 
-export default ReceiptList
+export default BillList
 
 
