@@ -18,11 +18,11 @@ export const getReceiptsThunk = createAsyncThunk("get/receipts", async () => {
     return (await response.json()) as IReceipt[]
 })
 
-export const postReceiptThunk = createAsyncThunk("post/receipt", async (bill: IBill) => {
+export const postReceiptThunk = createAsyncThunk("post/receipt", async (receipt: IReceipt) => {
     const response = await fetch(`${ENDPOINT}receipt`, {
         method: HttpMethod.POST,
         headers: HEADERS,
-        body: JSON.stringify(bill)
+        body: JSON.stringify(receipt)
     })
     return (await response.json()) as IReceipt
 })
