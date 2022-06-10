@@ -35,7 +35,7 @@ export const deleteProductThunk = createAsyncThunk("delete/product", async (prod
 
 export const updateProductThunk = createAsyncThunk('put/product',
     async (product: IProduct) => {
-        const response = await fetch(`${ENDPOINT}product`, {
+        const response = await fetch(`${ENDPOINT}product/`, {
             method: HttpMethod.PUT,
             headers: HEADERS,
             body: JSON.stringify(product)

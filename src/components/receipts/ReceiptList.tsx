@@ -20,7 +20,7 @@ const ReceiptList : React.FC<IProps> = () => {
         }
     }, [])
 
-    const content = receipts.map(receipt => <ReceiptCard key={receipt.id} receipt={receipt} />)
+    const content = receipts.map(receipt => <ReceiptCard key={receipt.id} receipt={receipt} />).reverse()
 
     return <SimpleGrid
         cols={4}

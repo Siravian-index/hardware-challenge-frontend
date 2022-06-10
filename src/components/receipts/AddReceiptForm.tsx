@@ -1,9 +1,9 @@
 import * as React from "react"
+import {useEffect} from "react"
 import {Button, Container, NumberInput, Paper, Select} from "@mantine/core";
 import {useSelector} from "react-redux";
 import {selectProviderList} from "../../redux/features/provider/providerSlice";
-import {selectProductById, selectProductList, updateProductThunk} from "../../redux/features/products/productSlice";
-import {useEffect} from "react";
+import {selectProductList, updateProductThunk} from "../../redux/features/products/productSlice";
 import {IProduct} from "../../redux/features/products/productTypes";
 import {IReceipt} from "../../redux/features/receipt/receiptTypes";
 import {IProvider} from "../../redux/features/provider/providerTypes";
@@ -24,6 +24,8 @@ const AddReceiptForm: React.FC<IProps> = () => {
     const [productId, setProductId] = React.useState<string | null>("")
     const [amount, setAmount] = React.useState(0)
     const [productToEdit, setProductToEdit] = React.useState<IProduct>();
+    //show state
+    const [showButton, setShowButton] = React.useState(false)
 
     const providerSelectData = providerList.map((provider) => ({value: `${provider.id}`, label: provider.name}))
     const productSelectData = productList.map((product) => ({value: `${product.id}`, label: product.name}))
@@ -43,24 +45,28 @@ const AddReceiptForm: React.FC<IProps> = () => {
             }
             //product stock updated
             const updatedProductStock: IProduct = {...product, stock: product.stock + amount}
-        //    dispatchers
-            console.log("updatedProduct", updatedProductStock)
-        //     dispatch(postReceiptThunk(newReceipt))
-        //     dispatch(updateProductThunk(updatedProductStock))
-        //    setForm to default
+            //    dispatchers
+            dispatch(postReceiptThunk(newReceipt))
+            dispatch(updateProductThunk(updatedProductStock))
+            //    setForm to default
             setProviderId("")
             setProductId("")
             setAmount(0)
         }
     }
 
-    console.log("product to edit", productToEdit)
 
     useEffect(() => {
         const optionalProduct = productList.find(p => p.id === productId)
         setProductToEdit(optionalProduct)
     }, [productId])
 
+    useEffect(() => {
+        if (productToEdit) {
+            const limit = productToEdit?.max - productToEdit?.stock
+            setShowButton(amount <= limit && Boolean(amount))
+        }
+    }, [amount])
 
     const handleNumericChange = (e: number | undefined, setValueCallback: React.Dispatch<React.SetStateAction<number>>) => {
         if (typeof e === "number") {
@@ -98,9 +104,13 @@ const AddReceiptForm: React.FC<IProps> = () => {
                         />
                     }
 
-                    <Button color="cyan" type="submit" mt="xs">
-                        Add
-                    </Button>
+                    {
+                        showButton &&
+                        <Button color="cyan" type="submit" mt="xs">
+                            Add
+                        </Button>
+                    }
+
                 </form>
             </Paper>
         </Container>
@@ -108,17 +118,3 @@ const AddReceiptForm: React.FC<IProps> = () => {
 }
 
 export default AddReceiptForm
-
-
-/*
-{
-  "provider": {
-    "id": "string",
-    "name": "string",
-    "card": "string"
-  },
-  "productId": "string",  same way as before
-  "amount": 0,
-  "date": "2022-06-10"
-}
-* */
