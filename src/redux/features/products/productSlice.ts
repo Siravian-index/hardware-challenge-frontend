@@ -48,7 +48,9 @@ export const updateProductThunk = createAsyncThunk('put/product',
 const productSlice = createSlice({
     name: "products",
     initialState,
-    reducers: {},
+    reducers: {
+
+    },
     extraReducers: (builder) => {
         builder.addCase(getProductsThunk.pending, (state) => {
             state.status = fetchStatus.PENDING

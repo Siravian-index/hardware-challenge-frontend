@@ -7,6 +7,17 @@ export interface IProductInitialState {
     status: fetchStatus
 }
 
+export interface IProductToBeSold {
+    id: string
+    name: string
+    price: number
+    amount: number
+    stock: number
+    max: number
+    min: number
+}
+
+
 export interface IProduct {
     id?: string
     name: string

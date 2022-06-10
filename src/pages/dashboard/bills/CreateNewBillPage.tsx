@@ -8,8 +8,8 @@ interface IProps {}
 const CreateNewBillPage : React.FC<IProps> = () => {
     return <>
         <Title order={3} mb="xs">New Bill</Title>
-        {/*<CreateBillForm/>*/}
-        <ComplexBillForm/>
+        <CreateBillForm/>
+        {/*<ComplexBillForm/>*/}
     </>
 }
 
