@@ -11,7 +11,6 @@ interface IProps {}
 
 const ProductList : React.FC<IProps> = () => {
     const products = useSelector(selectProductList())
-    console.log(products)
     const status = useSelector(selectProductStatus())
     const dispatch = useAppDispatch()
 

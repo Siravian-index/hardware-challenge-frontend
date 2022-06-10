@@ -9,7 +9,6 @@ interface IProps {
 const BillCard: React.FC<IProps> = ({bill}) => {
     const theme = useMantineTheme();
 
-    console.log(bill)
 
     const productSold = bill.productsSold.map((product) => {
         return <div key={product.id}>

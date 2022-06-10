@@ -11,7 +11,6 @@ interface IProps {
 
 const ProductCard: React.FC<IProps> = ({product}) => {
     const theme = useMantineTheme();
-    console.log(theme)
 
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
