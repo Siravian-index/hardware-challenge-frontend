@@ -20,8 +20,7 @@ const ProductCard: React.FC<IProps> = ({product}) => {
         }
     }
     const handleClick = () => {
-        console.log("todo navigate to handle product")
-        // navigate("/dashboard/receipt")
+        navigate("/dashboard/receipt")
     }
 
     return <>

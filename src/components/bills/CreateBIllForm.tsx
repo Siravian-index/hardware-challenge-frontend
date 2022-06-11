@@ -7,12 +7,14 @@ import {IProductToBeSold} from "../../redux/features/products/productTypes";
 import {useAppDispatch} from "../../redux/app/store";
 import {postBillThunk} from "../../redux/features/bill/billSlice";
 import {IBill} from "../../redux/features/bill/billTypes";
+import {selectUser} from "../../redux/features/user/userSlice";
 
 interface IProps {
 }
 
 const CreateBillForm: React.FC<IProps> = () => {
-    const DEFAULT_SELLER = "Raul"
+    const user = useSelector(selectUser())
+    const DEFAULT_SELLER = user?.name || "Raul"
     //dispatch
     const dispatch = useAppDispatch()
     //select
