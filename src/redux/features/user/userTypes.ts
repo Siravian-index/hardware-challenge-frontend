@@ -1,8 +1,8 @@
 export interface IUser {
-    email: string
-    photoURL?: string
-    name?: string
-    accessToken: string
+    email: string | null
+    photoURL: string | null
+    name: string | null
+    uid: string
     emailVerified: boolean
 }
 

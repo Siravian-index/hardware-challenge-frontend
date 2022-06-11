@@ -7,7 +7,7 @@ interface IProps {
 }
 
 const LoginPage: React.FC<IProps> = () => {
-    const [showLogin, setShowLogin] = React.useState(false);
+    const [showLogin, setShowLogin] = React.useState(true);
 
     return <Container size="xs" px="xs" my="xl">
         <Group>
