@@ -1,5 +1,5 @@
 import * as React from "react"
-import {Button, Container, MultiSelect, Paper, Text, TextInput} from "@mantine/core";
+import {Button, Container, Group, MultiSelect, Paper, Text, TextInput} from "@mantine/core";
 import {useSelector} from "react-redux";
 import {selectProductList} from "../../redux/features/products/productSlice";
 import ProductsToBeSoldCard from "./ProductsToBeSoldCard";
@@ -28,10 +28,7 @@ const CreateBillForm: React.FC<IProps> = () => {
         .filter((p) => p.stock > 0)
         .map((p) => ({label: p.name, value: `${p.id}`}))
 
-    //handleSubmit
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-    }
+
 
     const handleClearAll = () => {
         setProductsToBeSold([])
@@ -46,6 +43,25 @@ const CreateBillForm: React.FC<IProps> = () => {
                                                                                 callbackSetter={setProductsToSellList}
                                                                                 productId={productId}/>)
 
+    const total = productToSellList.reduce((init, product) => init + (product.amount * product.price), 0)
+    //handleSubmit
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        if (customer && productToSellList.length > 0) {
+            //map list of products
+            const productsSold = productToSellList.map((p) => ({id: p.id, name: p.name, price: p.price, amount: p.amount}))
+            const newBill = {
+                customer,
+                seller: DEFAULT_SELLER,
+                productsSold,
+                total,
+            }
+
+        //  dispatch POST new bill
+
+        // dispatch multiple PUT products
+        }
+    }
     return <>
         <Container size="xs" px="xs" my="xl">
             <Paper shadow="xs" p="xl">
@@ -67,12 +83,10 @@ const CreateBillForm: React.FC<IProps> = () => {
                     />
 
                     {content}
-                    {/*total*/}
-
 
                     {
                         showConfirmButton &&
-                        <Button color="green" type="submit" mt="xs">
+                        <Button  color="green" type="submit" mt="xs">
                             Confirm sell
                         </Button>
                     }
@@ -80,9 +94,14 @@ const CreateBillForm: React.FC<IProps> = () => {
 
                 {
                     showClearAllButton &&
+                    <Group position="center">
+
                     <Button onClick={handleClearAll} color="red" type="submit" mt="xs">
                         Reset purchase
                     </Button>
+                        <Text>Total: {total}</Text>
+                    </Group>
+
                 }
 
             </Paper>

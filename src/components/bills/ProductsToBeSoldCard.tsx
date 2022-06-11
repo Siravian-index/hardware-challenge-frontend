@@ -93,7 +93,7 @@ const ProductsToBeSold: React.FC<IProps> = ({productId, callbackSetter, idCallba
             <Group position="center" mt="md">
                 <Button disabled={disableButtons} onClick={handlePlus}>+</Button>
                 <Button color='red' disabled={disableButtons} onClick={handleMinus}>-</Button>
-                <Button color='green' disabled={!disableConfirmButton} onClick={() => handleConfirmToList(productToSell)}>confirm</Button>
+                <Button color='green' disabled={!disableConfirmButton || disableButtons} onClick={() => handleConfirmToList(productToSell)}>confirm</Button>
                 <Button color='red' disabled={!disableButtons} onClick={() => handleSelfRemoval(productToSell)}>Remove item</Button>
             </Group>
 
