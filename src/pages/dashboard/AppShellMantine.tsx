@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {
     Anchor,
-    AppShell,
-    Burger, Divider,
-    Footer,
+    AppShell, Avatar,
+    Burger, Button, Divider,
+    Footer, Group,
     Header,
     MediaQuery,
     Navbar,
@@ -11,16 +11,21 @@ import {
     Title,
     useMantineTheme,
 } from '@mantine/core';
-import {Link, Outlet} from "react-router-dom";
+import {Link, Outlet, useNavigate} from "react-router-dom";
 import {getProductsThunk} from "../../redux/features/products/productSlice";
 import {useAppDispatch} from "../../redux/app/store";
 import {getBillsThunk} from "../../redux/features/bill/billSlice";
 import {getProvidersThunk} from "../../redux/features/provider/providerSlice";
 import {getReceiptsThunk} from "../../redux/features/receipt/receiptSlice";
+import {useSelector} from "react-redux";
+import {removeUserFromState, selectUser} from "../../redux/features/user/userSlice";
+import {IUser} from "../../redux/features/user/userTypes";
 
 export default function AppShellMantine() {
     const theme = useMantineTheme();
     const [opened, setOpened] = useState(false);
+    const navigate = useNavigate()
+    const user = useSelector(selectUser())
     //dispatch get
     const dispatch = useAppDispatch()
     useEffect(() => {
@@ -29,6 +34,14 @@ export default function AppShellMantine() {
         dispatch(getProvidersThunk())
         dispatch(getReceiptsThunk())
     }, [])
+
+
+
+    useEffect(() => {
+        if (!user) {
+            navigate("/")
+        }
+    }, [user])
     return (
         <AppShell
             styles={{
@@ -74,7 +87,11 @@ export default function AppShellMantine() {
             }
             footer={
                 <Footer height={60} p="md">
-                    Application footer
+                    <Group>
+                        <Avatar src={user?.photoURL} alt="avatar" />
+                        <Text>{user?.email}</Text>
+                        <Button onClick={() => dispatch(removeUserFromState(user as IUser))} compact color="red">Log out</Button>
+                    </Group>
                 </Footer>
             }
             header={
@@ -89,13 +106,11 @@ export default function AppShellMantine() {
                                 mr="xl"
                             />
                         </MediaQuery>
-
                         <Title order={3}>Don Raul's Hardware Store</Title>
                     </div>
                 </Header>
             }
         >
-            {/*this should render an outlet*/}
             <Outlet/>
         </AppShell>
     );
