@@ -1,5 +1,5 @@
 import * as React from "react"
-import {Alert, Button, Paper, PasswordInput, Text, TextInput} from "@mantine/core";
+import {Alert, Button, Center, Paper, PasswordInput, Text, TextInput} from "@mantine/core";
 import {signInWithEmailAndPassword} from "firebase/auth";
 import {auth} from "../../firebase";
 import {AlertCircle} from "tabler-icons-react";
@@ -7,6 +7,7 @@ import {useAppDispatch} from "../../redux/app/store";
 import {IUser} from "../../redux/features/user/userTypes";
 import {addUserToState} from "../../redux/features/user/userSlice";
 import {useNavigate} from "react-router-dom";
+import LoginWithGoogle from "./LoginWithGoogle";
 
 
 interface IProps {
@@ -74,6 +75,9 @@ const Login: React.FC<IProps> = () => {
                     Login
                 </Button>
             </form>
+            <Center>
+                <LoginWithGoogle/>
+            </Center>
         </Paper>
     </>
 }

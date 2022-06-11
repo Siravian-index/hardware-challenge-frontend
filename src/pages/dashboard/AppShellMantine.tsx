@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {
     Anchor,
-    AppShell, Avatar,
-    Burger, Button, Divider,
-    Footer, Group,
+    AppShell,
+    Avatar,
+    Burger,
+    Button,
+    Divider,
+    Footer,
+    Group,
     Header,
     MediaQuery,
     Navbar,
