@@ -1,7 +1,8 @@
 import * as React from "react"
-import {Button, Container, Paper, PasswordInput, Text, TextInput} from "@mantine/core";
-import { getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword } from "firebase/auth";
-import {useEffect} from "react";
+import {Alert, Button, Paper, PasswordInput, Text, TextInput} from "@mantine/core";
+import {signInWithEmailAndPassword} from "firebase/auth";
+import {auth} from "../../firebase";
+import {AlertCircle} from "tabler-icons-react";
 
 
 interface IProps {
@@ -10,30 +11,25 @@ interface IProps {
 const Login: React.FC<IProps> = () => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-
-    // const responseGoogle = (response: any) => {
-    //     console.log(response);
-    // }
+    const [showAlert, setShowAlert] = React.useState(false)
 
 
-    // useEffect(() => {
-    //     const auth = getAuth();
-    //     signInWithEmailAndPassword(auth, "depch47ff@gmail.com", "testing")
-    //         .then((userCredential) => {
-    //             // Signed in
-    //             const user = userCredential.user;
-    //             console.log(user)
-    //             // ...
-    //         })
-    //         .catch((error) => {
-    //             const errorCode = error.code;
-    //             const errorMessage = error.message;
-    //         });
-    // }, [])
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-
-
+        if (email && password) {
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    //dispatch
+                    console.log(user)
+                    //navigate
+                })
+                .catch((error) => {
+                    const errorMessage = error.message;
+                    console.log(errorMessage)
+                });
+        }
     }
 
     return <>
@@ -53,20 +49,14 @@ const Login: React.FC<IProps> = () => {
                     label="Password"
                     required
                 />
+                {showAlert && <Alert icon={<AlertCircle size={16}/>} title="Wrong email or password" color="red">
+                    Check your credentials and try again!
+                </Alert>}
                 <Button color="cyan" type="submit" mt="xs">
                     Login
                 </Button>
-            {/*    Google login here*/}
-            {/*    <GoogleLogin*/}
-            {/*        clientId="872604210222-fuck1i3b1frm7ndopuuecik5pnhghgu3.apps.googleusercontent.com"*/}
-            {/*        buttonText="Login"*/}
-            {/*        onSuccess={responseGoogle}*/}
-            {/*        onFailure={responseGoogle}*/}
-            {/*        cookiePolicy={'none'}*/}
-            {/*    />*/}
             </form>
         </Paper>
-
     </>
 }
 
