@@ -25,8 +25,6 @@ const CreateBillForm: React.FC<IProps> = () => {
     //product to be sent to the thunk
     const [productToSellList, setProductsToSellList] = React.useState<IProductToBeSold[]>([])
 
-    console.log("miracle", productToSellList)
-    console.log("id list", productsToBeSoldId)
     //selectData
     // const selectProductData = productList.map((p) => ({label: p.name, value: JSON.stringify(p)}))
     const selectProductData = productList
