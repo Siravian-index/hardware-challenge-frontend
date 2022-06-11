@@ -20,7 +20,7 @@ const BillList : React.FC<IProps> = () => {
         }
     }, [])
 
-    const content = bills.map(bill => <BillCard key={bill.id} bill={bill} />)
+    const content = bills.map(bill => <BillCard key={bill.id} bill={bill} />).reverse()
 
     return <SimpleGrid
         cols={4}
