@@ -16,20 +16,20 @@ const Login: React.FC<IProps> = () => {
     // }
 
 
-    useEffect(() => {
-        const auth = getAuth();
-        signInWithEmailAndPassword(auth, "depch47ff@gmail.com", "testing")
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                console.log(user)
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-            });
-    }, [])
+    // useEffect(() => {
+    //     const auth = getAuth();
+    //     signInWithEmailAndPassword(auth, "depch47ff@gmail.com", "testing")
+    //         .then((userCredential) => {
+    //             // Signed in
+    //             const user = userCredential.user;
+    //             console.log(user)
+    //             // ...
+    //         })
+    //         .catch((error) => {
+    //             const errorCode = error.code;
+    //             const errorMessage = error.message;
+    //         });
+    // }, [])
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
