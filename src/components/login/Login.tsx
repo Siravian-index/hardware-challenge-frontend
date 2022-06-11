@@ -28,8 +28,10 @@ const Login: React.FC<IProps> = () => {
                 .catch((error) => {
                     const errorMessage = error.message;
                     console.log(errorMessage)
+                    setShowAlert(true)
                 });
         }
+        setShowAlert(true)
     }
 
     return <>

@@ -4,6 +4,7 @@ import productReducer from "../features/products/productSlice";
 import providerReducer from "../features/provider/providerSlice";
 import billReducer from "../features/bill/billSlice";
 import receiptReducer from "../features/receipt/receiptSlice";
+import userReducer from "../features/user/userSlice";
 
 export const store = configureStore({
     reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
         providers: providerReducer,
         bill: billReducer,
         receipt: receiptReducer,
+        user: userReducer
     }
 })
 
