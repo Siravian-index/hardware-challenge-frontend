@@ -1,5 +1,5 @@
 import * as React from "react"
-import {Button, Container, Group, MultiSelect, Paper, Text, TextInput} from "@mantine/core";
+import {Alert, Button, Container, Group, MultiSelect, Paper, Text, TextInput} from "@mantine/core";
 import {useSelector} from "react-redux";
 import {selectProductList, updateProductThunk} from "../../redux/features/products/productSlice";
 import ProductsToBeSoldCard from "./ProductsToBeSoldCard";
@@ -8,6 +8,7 @@ import {useAppDispatch} from "../../redux/app/store";
 import {postBillThunk} from "../../redux/features/bill/billSlice";
 import {IBill} from "../../redux/features/bill/billTypes";
 import {selectUser} from "../../redux/features/user/userSlice";
+import {AlertCircle} from "tabler-icons-react";
 
 interface IProps {
 }
@@ -21,6 +22,7 @@ const CreateBillForm: React.FC<IProps> = () => {
     const productList = useSelector(selectProductList())
     //state
     const [customer, setCustomer] = React.useState('');
+    const [showSuccess, setShowSuccess] = React.useState(false)
     // const [total, setTotal] = React.useState(0) get total from store
     const [productsToBeSoldId, setProductsToBeSold] = React.useState([] as string[])
 
@@ -74,11 +76,19 @@ const CreateBillForm: React.FC<IProps> = () => {
                     }
                 }
             }
+            setShowSuccess(true)
+            setCustomer("")
             handleClearAll()
         }
     }
     return <>
         <Container size="xs" px="xs" my="xl">
+            {
+                showSuccess &&
+                <Alert icon={<AlertCircle size={16} />} title="Sold Accepted!" color="lime" radius="xl">
+                    Bill placed correctly!
+                </Alert>
+            }
             <Paper shadow="xs" p="xl">
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <TextInput
