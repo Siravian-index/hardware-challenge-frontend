@@ -18,7 +18,6 @@ const ProductForm: React.FC<IProps> = () => {
     const dispatch = useAppDispatch()
     const [showAlert, setShowAlert] = React.useState(false)
     const [showSuccess, setShowSuccess] = React.useState(false)
-
     const [name, setName] = React.useState("")
     const [description, setDescription] = React.useState("")
     const [price, setPrice] = React.useState(0)
