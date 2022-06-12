@@ -3,13 +3,14 @@ import {useSelector} from "react-redux";
 import {selectProductList} from "../../redux/features/products/productSlice";
 import {Alert} from "@mantine/core";
 import {AlertCircle} from "tabler-icons-react";
+import {capitalizeFirstLetterOf} from "../../util";
 
 interface IProps {
 }
 
 const AlertLowSupply: React.FC<IProps> = () => {
     const productList = useSelector(selectProductList())
-    const productLowOnStock = productList.filter(p => p.stock <= p.min).map(p => p.name)
+    const productLowOnStock = productList.filter(p => p.stock <= p.min).map(p => capitalizeFirstLetterOf(p.name))
     return <>
         {
             (productLowOnStock.length > 0) &&

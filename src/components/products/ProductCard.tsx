@@ -3,7 +3,8 @@ import {IProduct} from "../../redux/features/products/productTypes";
 import {Button, Card, Group, Text, useMantineTheme} from "@mantine/core";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../../redux/app/store";
-import {deleteProvidersThunk} from "../../redux/features/provider/providerSlice";
+import {deleteProductThunk} from "../../redux/features/products/productSlice";
+import {capitalizeFirstLetterOf} from "../../util";
 
 interface IProps {
     product: IProduct
@@ -16,19 +17,18 @@ const ProductCard: React.FC<IProps> = ({product}) => {
     const dispatch = useAppDispatch()
     const handleDelete = (product: IProduct) => {
         if (product.id) {
-            dispatch(deleteProvidersThunk(product.id))
+            dispatch(deleteProductThunk(product))
         }
     }
     const handleClick = () => {
-        console.log("todo navigate to handle product")
-        // navigate("/dashboard/receipt")
+        navigate("/dashboard/receipt")
     }
 
     return <>
         <div>
             <Card shadow="sm" p="lg">
                 <Group position="apart" style={{marginBottom: 5, marginTop: theme.spacing.sm}}>
-                    <Text weight={500}>{product.name} - ${product.price}</Text>
+                    <Text weight={500}>{capitalizeFirstLetterOf(product.name)} - ${product.price}</Text>
                     <Button onClick={() => handleDelete(product)} color='red' compact>Delete</Button>
                 </Group>
 

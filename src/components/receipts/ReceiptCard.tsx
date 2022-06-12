@@ -3,6 +3,7 @@ import {Card, Group, Text, useMantineTheme} from "@mantine/core";
 import {IReceipt} from "../../redux/features/receipt/receiptTypes";
 import {useSelector} from "react-redux";
 import {selectProductById, selectProductList} from "../../redux/features/products/productSlice";
+import {capitalizeFirstLetterOf} from "../../util";
 
 interface IProps {
     receipt: IReceipt
@@ -28,7 +29,7 @@ const ReceiptCard: React.FC<IProps> = ({receipt}) => {
                     {`Date: ${receipt.date}`}
                 </Text>
                 <Group position="apart" style={{marginBottom: 5, marginTop: theme.spacing.sm}}>
-                    <Text weight={500}>Provider: {receipt.provider.name}</Text>
+                    <Text weight={500}>Provider: {capitalizeFirstLetterOf(receipt.provider.name)}</Text>
                     <Text weight={500}>Provider's card: {receipt.provider.card}</Text>
                 </Group>
 

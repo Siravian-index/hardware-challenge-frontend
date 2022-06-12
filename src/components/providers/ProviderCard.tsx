@@ -4,6 +4,7 @@ import { Card, Image, Text, Badge, Button, Group, useMantineTheme } from '@manti
 import {useAppDispatch} from "../../redux/app/store";
 import {deleteProvidersThunk} from "../../redux/features/provider/providerSlice";
 import {useNavigate} from "react-router-dom";
+import {capitalizeFirstLetterOf} from "../../util";
 
 interface IProps {
     provider: IProvider
@@ -31,7 +32,7 @@ const ProviderCard: React.FC<IProps> = ({provider}) => {
         <div>
             <Card shadow="sm" p="lg">
                 <Group position="apart" style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
-                    <Text weight={500}>{provider.name}</Text>
+                    <Text weight={500}>{capitalizeFirstLetterOf(provider.name)}</Text>
                     <Button onClick={() => handleDelete(provider)} color='red' compact>Delete</Button>
                 </Group>
 

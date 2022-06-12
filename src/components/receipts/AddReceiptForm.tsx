@@ -9,6 +9,7 @@ import {IReceipt} from "../../redux/features/receipt/receiptTypes";
 import {IProvider} from "../../redux/features/provider/providerTypes";
 import {useAppDispatch} from "../../redux/app/store";
 import {postReceiptThunk} from "../../redux/features/receipt/receiptSlice";
+import {AlertCircle} from "tabler-icons-react";
 
 interface IProps {
 }
@@ -26,6 +27,7 @@ const AddReceiptForm: React.FC<IProps> = () => {
     const [productToEdit, setProductToEdit] = React.useState<IProduct>();
     //show state
     const [showButton, setShowButton] = React.useState(false)
+    const [showSuccess, setShowSuccess] = React.useState(false)
 
     const providerSelectData = providerList.map((provider) => ({value: `${provider.id}`, label: provider.name}))
     const productSelectData = productList.map((product) => ({value: `${product.id}`, label: product.name}))
@@ -49,6 +51,7 @@ const AddReceiptForm: React.FC<IProps> = () => {
             dispatch(postReceiptThunk(newReceipt))
             dispatch(updateProductThunk(updatedProductStock))
             //    setForm to default
+            setShowSuccess(true)
             setProviderId("")
             setProductId("")
             setAmount(0)
@@ -77,6 +80,12 @@ const AddReceiptForm: React.FC<IProps> = () => {
     return <>
         <Container size="xs" px="xs" my="xl">
             <Paper shadow="xs" p="xl">
+                {
+                    showSuccess &&
+                    <Alert icon={<AlertCircle size={16} />} title="Receipt created correctly!!" color="lime" radius="xl">
+                        Order placed correctly!
+                    </Alert>
+                }
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <Select
                         label="Select provider"

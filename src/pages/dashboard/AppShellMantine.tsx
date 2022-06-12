@@ -93,7 +93,7 @@ export default function AppShellMantine() {
                 <Footer height={60} p="md">
                     <Group>
                         <Avatar src={user?.photoURL} alt="avatar" />
-                        <Text>{user?.email}</Text>
+                        <Text>{user?.name || user?.email}</Text>
                         <Button onClick={() => dispatch(removeUserFromState(user as IUser))} compact color="red">Log out</Button>
                     </Group>
                 </Footer>
