@@ -4,6 +4,7 @@ import {Button, Card, Group, Text, useMantineTheme} from "@mantine/core";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../../redux/app/store";
 import {deleteProductThunk} from "../../redux/features/products/productSlice";
+import {capitalizeFirstLetterOf} from "../../util";
 
 interface IProps {
     product: IProduct
@@ -27,7 +28,7 @@ const ProductCard: React.FC<IProps> = ({product}) => {
         <div>
             <Card shadow="sm" p="lg">
                 <Group position="apart" style={{marginBottom: 5, marginTop: theme.spacing.sm}}>
-                    <Text weight={500}>{product.name} - ${product.price}</Text>
+                    <Text weight={500}>{capitalizeFirstLetterOf(product.name)} - ${product.price}</Text>
                     <Button onClick={() => handleDelete(product)} color='red' compact>Delete</Button>
                 </Group>
 
